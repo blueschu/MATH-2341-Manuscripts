@@ -1,0 +1,74 @@
+\documentclass[letterpaper,11pt]{article} % Copyright (c) 2019  Brian Schubert
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage[table]{xcolor}
+
+\thispagestyle{fancy}
+\cfoot{Copyright \textcopyright \ 2019 Brian Schubert}
+\lhead{MATH 2341\\Differential Equations and Linear Algebra}
+\rhead{Fall 2019 \\ Prof. Prasanth George}
+\renewcommand{\headrulewidth}{0pt}	
+
+
+\theoremstyle{definition}
+\newtheorem*{definition*}{Definition}
+
+
+\begin{document}
+%    \begin{tabularx}{\textwidth}{Xr}
+%        MATH 2341 & Fall 2019 \\ Differential Equations and Linear Algebra & Prasanth Geoge
+%    \end{tabularx}
+    \begin{center}
+        \LARGE{\underline{Common Laplace Transformations}} \\
+    \end{center}
+
+    \begin{definition*}[Laplace Transform]
+        Let $f$ be a continuous function of $t$, where $t \in [0, \infty)$. We define the Laplace Transform $\mathcal L\{f(t)\}$ by
+        \begin{equation*}
+            \mathcal L\{f(t)\} = \int_0^\infty e^{-st} f(t) \, \mathrm dt
+        \end{equation*}
+        where $s$ is the complex ``frequency" parameter.
+        
+        Remark 1. Note $\mathcal L\{f(x)\}$ is a function of a different variable $s$, and the $\mathcal L$ is linear with respect to $f$.
+        
+        Remark 2. Common alternative notation for the Laplace Transform of $f$ include $L[f(t)]$ and $F(s)$.
+    \end{definition*}
+    
+    In the table below, let $Y(s)$ denote $\mathcal{L}\{y(t)\}$ and $F(s)$ denote $\mathcal{L}\{f(t)\}$.
+    \vspace{-10pt}
+    \renewcommand{\arraystretch}{2.3}
+    \begin{table}[h]
+        \large
+        {\rowcolors{3}{white}{lightgray!15}
+            \begin{tabularx}{0.95\textwidth}{
+                    *{3}{>{\centering\arraybackslash}X}
+                }
+                Case & $f(t)$ & $\mathcal{L}\{f(t)\}$ \\
+                \hline
+                (1) & $k$ & \( \displaystyle \frac{k}{s}\) \\
+                (2) & $t^n$ &  \( \displaystyle \frac{n!}{s-a} \) \\
+                (3) & $e^{at}$ & \( \displaystyle \frac{1}{s-a}\) \\
+                (4) & $t^n e^{at}$ & \( \displaystyle \frac{n!}{(s-a)^{n+1}} \) \\ % \frac{n!}{(s-a)^{n+1}} (n!) / (s-a)^{n+1}
+                (5) & $\cos \left( kt \right)$ & \( \displaystyle \frac{s}{s^2 + k^2}\) \\
+                (6) & $\sin \left( kt \right)$ & \( \displaystyle \frac{k}{s^2 + k^2}\) \\
+                (7) & $e^{at}\cos \left( kt \right)$ & \( \displaystyle \frac{s-a}{(s-a)^2 + k^2} \) \\
+                    % \frac{s-a}{(s-a)^2 + k^2} \left(s-a\right)/\left((s-a)^2 + k^2\right)
+                (8) & $e^{at}\sin \left( kt \right)$ & \( \displaystyle\frac{k}{(s-a)^2 + k^2}\) \\
+                    % \frac{k}{(s-a)^2 + k^2}  k/\left((s-a)^2 + k^2\right)
+                (9) & $t \sin \left( kt \right)$ & \( \displaystyle \frac{2ks}{\left(s^2 + k^2\right)^2}\) \\
+                    % \frac{2ks}{\left(s^2 + k^2\right)^2} \left(2ks\right)/\left(s^2 + k^2\right)^2
+                (10) & $t \cos \left( kt \right)$ & \( \displaystyle \frac{s^2 - k^2}{\left(s^2 + k^2\right)^2}\) \\ 
+                \hline
+                    %\frac{\left(s^2 - k^2\right)}{\left(s^2 + k^2\right)^2} \left(s^2 - k^2\right) / \left(s^2 + k^2\right)^2
+                (11) Step Function & $u(t-a)$ &  \( \displaystyle \frac{e^{-as}}{s}\) \\
+                (12) Delta Function & $\delta(t-a)$ &  \( \displaystyle e^{-as}\) \\
+                (13) 2nd Shifting Theorem & $u(t-a)f(t-a)$ &  \( \displaystyle e^{-as}F(s)\) \\
+                (14) Derivative Transforms & $y'$ &  \( \displaystyle sY(s) - y(0) \) \\
+                (15) Derivative Transforms & $y''$ &  \( s^2 Y(s) - sy(0) - y'(0 )\) \\
+            \end{tabularx}
+    }
+    \end{table}
+\end{document}
