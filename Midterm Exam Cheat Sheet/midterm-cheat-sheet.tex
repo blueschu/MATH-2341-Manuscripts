@@ -1,0 +1,268 @@
+\documentclass[10pt,landscape,letterpaper]{article}
+\usepackage{multicol}
+%\usepackage{calc}
+%\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+%\usepackage{color,graphicx,overpic}
+%\usepackage{hyperref}
+%\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tabularx}
+
+
+%
+% Styling inspired by tex.stackexchange user "Dror" in this posting:
+% https://tex.stackexchange.com/questions/8827/preparing-cheat-sheets
+%
+
+\thispagestyle{fancy}
+\cfoot{\scriptsize Copyright \textcopyright \ 2019 Brian Schubert}
+\rfoot{\scriptsize Revised 2019-10-16}
+\lhead{MATH 2341\\Differential Equations and Linear Algebra}
+\rhead{Fall 2019 \\ Prof. Prasanth George}
+\chead{\large \underline{Midterm Exam ``Cheat Sheet"}}
+\renewcommand{\headrulewidth}{0pt}
+
+\geometry{top=0.7in,left=.5in,right=.5in,bottom=.5in}
+
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+%\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+%                                {-1ex plus -.5ex minus -.2ex}%
+%                                {1ex plus .2ex}%
+%                                {\normalfont\small\bfseries}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+% Notation Definitions
+\newcommand{\dd}[1]{\mathrm{d}#1}
+\newcommand{\diffop}[2][]{\frac{\dd#1}{\dd #2}}
+
+\newcommand\cheatsheetmargin{0.2cm}
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\underline{Ordinary Differential Equations}} \\
+\end{center}
+
+\section{Separable ODEs}
+ \begin{description}[style=unboxed,leftmargin=\cheatsheetmargin]
+     \item[Form:] $$\displaystyle y' = f(x)g(y)$$ \\
+    \item[Solved by:] Separating the $x$- and $y$-terms, and then integrating both sides with respect to $x$:  \begin{equation*}
+    \boxed{\int \frac{1}{g(y)} \dd y = \int f(x) \, \dd x}
+    \end{equation*}
+%    \item[Example:] $$x \left(\cot y\right) \diffop[y]{x} = 1$$ \\ 
+%        \begin{align*}
+%        &\implies x \left(\frac{\cos y}{\sin y}\right)\diffop[y]{x} = 1
+%        &&\implies \left(\frac{\cos y}{\sin y}\right)\diffop[y]{x} = \frac 1 x \\
+%        &\implies \ln \sin y = \ln x + C 
+%        &&\implies \sin y = Cx \\
+%        &\implies y = \sin^{-1} Cx
+%        \end{align*}
+\end{description}
+
+
+\section{First Order Linear ODEs}
+\begin{description}[style=unboxed,leftmargin=\cheatsheetmargin]
+    \item[Form:]  $$y' + p(x)y = q(x)$$
+    \item[Solved by:] \begin{align*}
+    \boxed{\int \left( I(x)y\right)' \dd x = \int I(x)q(x) \, \dd } \\
+    \boxed{\text{where } I(x) = e^{\int p(x) \, \dd x}}
+    \end{align*}
+\end{description}
+
+\section{Second Order Constant Coefficient Homogeneous ODEs}
+
+\begin{description}[style=unboxed,leftmargin=\cheatsheetmargin]
+    \item[Key Idea:] For a degree $n$ linear ODE, the homogeneous solution will be the linear combinations of $n$ functions, which are found by assuming $y=e^{rt}$ is a solution for some $r$ and substituting this into the ODE to solve for $r$.
+    \item[Form:]  $$ay'' + by' + cy = 0, \quad a,b,c \in \mathbb{R}$$
+    \item[Solved by:]
+        \begin{equation*}
+        y(x) = C_1 e^{r_1 x} + C_2 e^{r_2 x}
+        \end{equation*}
+        where
+         \begin{equation*} ar^2 + br + c = 0 , \qquad
+        r_1, r_2 = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+        \end{equation*}
+       
+    \item[Case 1.] $b^2 - 4ac > 0$:
+        \begin{equation*}
+            \boxed{y(x) = C_1 e^{r_1 x} + C_2 e^{r_2 x}}
+        \end{equation*}
+    \item[Case 2.] $b^2 - 4ac =0$:\\
+    Here, $r_1 = r_2 = \frac{-b}{2a}.$ When this occurs, the second solution to the ODE is $\mathbf{x}e^{rt}$:
+        \begin{equation*}
+            \boxed{y(x) = C_1 e^{r_1 x} + C_2 \mathbf{x}e^{r_1 x}}
+        \end{equation*}
+    \item[Case 3.] $b^2 - 4ac < 0$:
+        In this case, $r_1$ and $r_2$ are complex numbers $p \pm qi$ where $p = \frac{-b}{2a}$ and $q = \frac{\sqrt{4ac - b^2 }}{2a}$. Then,
+        \begin{equation*}
+        y(x)= c_1e^{(p+qi)x} + c_2 e^{(p-qi) x} = e^{px} \left[c_1 e^{qix} + c_2 e^{-qix}\right]
+        \end{equation*}
+        which, by Euler's Formula $e^{i\theta} = \cos \theta + i \sin \theta$ becomes
+         \begin{equation*}
+         \boxed{
+             y(x) = e^{px} \left[C_1 \sin \left(qx\right) + C_2 \cos \left(qx\right) \right]
+         }
+         \end{equation*}
+         where $C_1, C_2$ are the real coefficients $c_1 + c_2$ and $ic_1 - ic_2$.
+    \item[Spring-Mass-Dashpot System:] \begin{equation*}mx'' + cx' +kx = 0 \end{equation*}
+    \begin{description}[style=unboxed,leftmargin=0.1cm]
+        \item[Case 1:] $c=0 \implies$ Underdamped Vibration \\
+            \qquad \underline{Simple Harmonic Motion}
+            \begin{align*}
+                x(t) &= C_1 \cos \omega t + C_2 \sin \omega t, \quad \omega = \sqrt{\frac{k}{m}}\\
+                \implies x(t) &= \boxed{A\cos (\omega t - \theta)}
+            \end{align*}
+            where
+            \begin{gather*}
+                \boxed{A = \sqrt{C_1^2 + C_2^2}} \\
+                \boxed{\theta = \begin{cases} 
+                    \tan^{-1} \frac{C_2}{C_1} & \text {if $\theta$ is in Q1} \\
+                    \tan^{-1} \frac{C_2}{C_1} + \phantom{2}\pi& \text {if $\theta$ is in Q2 or Q3} \\
+                    \tan^{-1} \frac{C_2}{C_1} + 2\pi & \text {if $\theta$ is in Q4}
+                \end{cases}}
+            \end{gather*}
+        \item[Case 2a:] $c^2 > 4mk \implies$ ``Overdamped" \\ 
+            \qquad \underline{Oscillations die rapidly}
+            \begin{equation*}
+                 \boxed{x(t) = C_1 e^{r_1 t} + C_2 e^{r_2 t}}
+            \end{equation*}
+        \item[Case 2b:] $c^2 = 4mk \implies$ ``Critically Damped Oscillation" \\
+            \begin{equation*}
+            \boxed{x(t) = C_1 e^{r_1 t} + C_2 \mathbf{t}e^{r_2 t}}
+            \end{equation*}
+         \item[Case 2c:] $c^2 < 4mk$
+        \begin{gather*}
+        r_1, r_2 = \underbrace{\frac{-c}{2m}}_{p} \pm i\underbrace{\frac{\sqrt{4mk - c^2}}{2m}}_{\mu: \text{ pseduo frequency}} \\
+        \boxed{x(t) = e^{px} \left[C_1 \sin \left(\mu t\right) + C_2 \cos \left(\mu t\right) \right]}
+        \end{gather*}
+    \end{description}
+\end{description}
+
+
+\section{Second Order Constant Coefficient \underline{Non-}Homogeneous ODEs}
+\begin{description}[style=unboxed,leftmargin=\cheatsheetmargin]
+    \item[Form:]  \begin{equation*} ay'' + by' + cy = \mathbf{f(x)}, \quad a,b,c \in \mathbb{R}\end{equation*}
+    where $f$ is a continuous function of $x$.
+    \item[Solved by:]
+    \begin{equation*} \boxed{y(x) = y_n(x) + y_p(x)}\end{equation*}
+    where 
+    \begin{itemize}
+        \item$y_n$ is the homogeneous (null) solution to $ay'' + by' + cy = 0.$
+         \item$y_p$ is the particular solution to for the non-homogeneous $f$.
+    \end{itemize}
+    \item[To Solve for $y_p$:]
+    \begin{enumerate}
+        \item ``Guess" $y_p$ based on the function $f$.
+        \item Plug the guess for $y_p$ into $ay'' + by' + cy = f(x)$
+        \item Solve for $y_p$.
+    \end{enumerate}
+
+    \columnbreak
+
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Non-homogeneous $f(x)$} & \textbf{``Guess" for $y_p$} \\
+        \hline
+        $ae^{kt}$ & $Ae^{kt}$ \\
+        $a\cos k t$ or $a\sin k t$ &  $A\cos k + B\sin k t$ \\
+        Polynomial of degree $n$ & Polynomial of degree $n$ \\
+        \hline
+    \end{tabular}
+    \item[Important:]
+        If any term of $y_p$ is linearly dependent with a term of $y_n$, multiply the term of $y_p$ by $t$ until it is linearly independent with all other terms.
+   \item[Forced Mechanical Vibrations]
+   \begin{equation*}
+   mx'' + cx' + kx = f(t), \quad f(t) \text{ is an external force}
+   \end{equation*}
+   \begin{itemize}
+       \item$y_n$ is the ``transient solution"; approaches 0 and $t \to \infty$.
+       \item$y_p$ is the ``Steady periodic solution" or ``steady state solution"; keeps oscillating as $t\to \infty$.
+   \end{itemize}
+    \item[Resonance] TODO
+\end{description}
+
+\section{The Laplace Transform}
+{\scriptsize * Table of common transformations separate from this document.}
+
+Let $f$ be a continuous function of $t$, where $t \in [0, \infty)$. We define the Laplace Transform $\mathcal L\{f(t)\}$ by
+\begin{equation*}
+\mathcal L\{f(t)\} = \int_0^\infty e^{-st} f(t) \, \mathrm dt
+\end{equation*}
+where $s$ is the complex ``frequency" parameter.
+
+\subsection{The Heaviside Step Function}
+``Turn a function on at time $t$"
+\begin{gather*}
+u(t-a) := \begin{cases}
+    0 & t < a \\
+    1 & t \geq a \\
+\end{cases}, \qquad
+\diffop{x} u(t-a) =: \ \delta(t-a)\\
+f(t)  = \begin{cases}
+f_1(t) & t \in [0, t_1) \\
+f_2(t) & t \in [t_1, t_2) \\
+ & \vdots\\
+\end{cases} = \begin{array}{rl} 
+    f_1(t) 	&+ (f_2(t) - f_1(t))u(t-t_1) \\ 
+            &+ (f_3(t) - f_2(t))u(t-t_2) \\
+            &+ \, \cdots
+\end{array}
+\end{gather*}
+
+\subsection{The Dirac Delta Function}
+
+\begin{gather*}
+\delta(t-a) := \begin{cases}
+0 & t \neq a \\
+1 & t = a \\
+\end{cases} \\
+\int_{-\infty}^\infty \delta(t-a) \, \mathrm dt = 1, \quad \int_{-\infty}^\infty \delta(t-a) f(t) \, \mathrm dt = f(a)
+\end{gather*}
+
+\subsection{Partial Fractions}
+
+\begin{equation*}
+\frac{1}{(s)(s-1)^2(s^2 -2s + 3)} = \frac{A}{s} + \frac{B}{s-1} + \frac{C}{(s-1)^2} + \frac{Ds + E}{(s^2 -2s + 3)}
+\end{equation*}
+
+%\begin{center}
+%    \Large{\underline{Linear Algebra}} \\
+%\end{center}
+
+
+\end{multicols}
+\end{document}
