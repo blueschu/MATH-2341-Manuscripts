@@ -130,7 +130,7 @@
         \begin{equation*}
         y(x)= c_1e^{(p+qi)x} + c_2 e^{(p-qi) x} = e^{px} \left[c_1 e^{qix} + c_2 e^{-qix}\right]
         \end{equation*}
-        which, by Euler's Formula $e^{i\theta} = \cos \theta + i \sin \theta$ becomes
+        which, by Euler's Formula $e^{i\theta} = \cos \theta + i \sin \theta$, becomes
          \begin{equation*}
          \boxed{
              y(x) = e^{px} \left[C_1 \sin \left(qx\right) + C_2 \cos \left(qx\right) \right]
@@ -210,13 +210,13 @@
    \end{equation*}
    \begin{itemize}
        \item$y_n$ is the ``transient solution"; approaches 0 and $t \to \infty$.
-       \item$y_p$ is the ``Steady periodic solution" or ``steady state solution"; keeps oscillating as $t\to \infty$.
+       \item$y_p$ is the ``steady periodic solution" or ``steady state solution"; keeps oscillating as $t\to \infty$.
    \end{itemize}
     \item[Resonance] TODO
 \end{description}
 
 \section{The Laplace Transform}
-{\scriptsize * Table of common transformations separate from this document.}
+\textit{\scriptsize * Table of common transformations separate from this document.}
 
 Let $f$ be a continuous function of $t$, where $t \in [0, \infty)$. We define the Laplace Transform $\mathcal L\{f(t)\}$ by
 \begin{equation*}
@@ -252,6 +252,13 @@ f_2(t) & t \in [t_1, t_2) \\
 \end{cases} \\
 \int_{-\infty}^\infty \delta(t-a) \, \mathrm dt = 1, \quad \int_{-\infty}^\infty \delta(t-a) f(t) \, \mathrm dt = f(a)
 \end{gather*}
+
+\subsection{Shifting Theorems}
+If $\mathcal{L}\{f(t)\} = F(s)$, then
+\begin{enumerate}
+    \item $\mathcal{L}\{e^{at}f(t)\} = F(s-a)$
+    \item $\mathcal{L}\{u(t-a)(f(t-a))\} = e^{-as}F(s)$
+\end{enumerate}
 
 \subsection{Partial Fractions}
 
