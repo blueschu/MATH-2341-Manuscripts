@@ -93,9 +93,16 @@
 \begin{description}[style=unboxed,leftmargin=\cheatsheetmargin]
     \item[Form:]  \begin{equation*}y' + p(x)y = q(x)\end{equation*}
     \item[Solved by:] \begin{align*}
-    \boxed{\int \left( I(x)y\right)' \dd x = \int I(x)q(x) \, \dd } \\
-    \boxed{\text{where } I(x) = e^{\int p(x) \, \dd x}}
+    \boxed{\int \left( I(x)y\right)' \dd x = \int I(x)q(x) \, \dd x \quad
+    \text{where } I(x) = e^{\int p(x) \, \dd x}}
     \end{align*}
+    \item[Mixing Tank Problems]
+    \begin{gather*}
+        \mathrm d A / \mathrm d t = r_\text{in}c_\text{in} - r_\text{out}c_\text{out},
+        \quad c_\text{out} = A(t)/V(t)\\
+        \implies \boxed{\diffop[A]{t} + \frac{A}{V}r_\text{out} = r_\text{in}c_\text{in}}, \quad 
+        \diffop[V]{t} = r_\text{in} - r_\text{out} 
+    \end{gather*}
 \end{description}
 
 \section{Second Order Constant Coefficient Homogeneous ODEs}
@@ -188,11 +195,17 @@
         \item Plug in the guess for $y_p$ into $ay'' + by' + cy = f(x)$
         \item Solve for $y_p$.
     \end{enumerate}
-
+\end{description}
+    
+    % Split description into two descriptions to allow the second half to be
+    % included in the third column's "minipage"
     \columnbreak
-
+    
+% Group the third column in a "minipage" to ensure all element remain on the same page
+\begin{minipage}{\columnwidth}
+\begin{description}[style=unboxed,leftmargin=\cheatsheetmargin]
     \renewcommand{\arraystretch}{1.5}
-    \begin{tabular}{|c|c|}
+    \item \begin{tabular}{|c|c|}
         \hline
         \textbf{Non-homogeneous $f(x)$} & \textbf{``Guess" for $y_p$} \\
         \hline
@@ -213,6 +226,7 @@
    \end{itemize}
     \item[Resonance] TODO
 \end{description}
+
 
 \section{The Laplace Transform}
 \textit{\scriptsize * Table of common transformations separate from this document.}
@@ -269,6 +283,7 @@ If $\mathcal{L}\{f(t)\} = F(s)$, then
 %    \Large{\underline{Linear Algebra}} \\
 %\end{center}
 
+\end{minipage} % End Column 3
 
 \end{multicols}
 \end{document}
