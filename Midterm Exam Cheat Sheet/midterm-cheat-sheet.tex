@@ -78,7 +78,7 @@
 
 \section{Separable ODEs}
  \begin{description}[style=unboxed,leftmargin=\cheatsheetmargin]
-    \item[Form:] $$\displaystyle y' = f(x)g(y)$$ \\
+    \item[Form:] \begin{equation*}y' = f(x)g(y)\end{equation*}
     \item[Solved by:] Separating the $x$- and $y$-terms, and then integrating both sides with respect to $x$:  \begin{equation*}
     \boxed{\int \frac{1}{g(y)} \dd y = \int f(x) \, \dd x}
     \end{equation*}
@@ -91,7 +91,7 @@
 
 \section{First Order Linear ODEs}
 \begin{description}[style=unboxed,leftmargin=\cheatsheetmargin]
-    \item[Form:]  $$y' + p(x)y = q(x)$$
+    \item[Form:]  \begin{equation*}y' + p(x)y = q(x)\end{equation*}
     \item[Solved by:] \begin{align*}
     \boxed{\int \left( I(x)y\right)' \dd x = \int I(x)q(x) \, \dd } \\
     \boxed{\text{where } I(x) = e^{\int p(x) \, \dd x}}
@@ -102,7 +102,7 @@
 
 \begin{description}[style=unboxed,leftmargin=\cheatsheetmargin]
 %    \item[Key Idea:] For a degree $n$ linear ODE, the homogeneous solution will be the linear combinations of $n$ functions, which are found by assuming $y=e^{rt}$ is a solution for some $r$ and substituting this into the ODE to solve for $r$.
-    \item[Form:]  $$ay'' + by' + cy = 0, \quad a,b,c \in \mathbb{R}$$
+    \item[Form:] \begin{equation*}ay'' + by' + cy = 0, \quad a,b,c \in \mathbb{R}\end{equation*}
     \item[Solved by:]
         \begin{equation*}
         y(x) = C_1 e^{r_1 x} + C_2 e^{r_2 x}
@@ -158,7 +158,7 @@
             \begin{equation*}
                  \boxed{x(t) = C_1 e^{r_1 t} + C_2 e^{r_2 t}}
             \end{equation*}
-        \item[Case 2b:] $c^2 = 4mk \implies$ ``Critically Damped Oscillation" \\
+        \item[Case 2b:] $c^2 = 4mk \implies$ ``Critically Damped Oscillation"
             \begin{equation*}
             \boxed{x(t) = C_1 e^{r_1 t} + C_2 \mathbf{t}e^{r_2 t}}
             \end{equation*}
