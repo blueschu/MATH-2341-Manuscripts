@@ -208,11 +208,12 @@
     \renewcommand{\arraystretch}{1.5}
     \item \begin{tabular}{|c|c|}
         \hline
-        \textbf{Non-homogeneous $f(x)$} & \textbf{``Guess" for $y_p$} \\
+        \textbf{Non-homogeneous $f(t)$} & \textbf{``Guess" for $y_p$} \\
         \hline
         $ae^{kt}$ & $Ae^{kt}$ \\
         $a\cos k t$ or $a\sin k t$ &  $A\cos k + B\sin k t$ \\
         Polynomial of degree $n$ & Polynomial of degree $n$ \\
+        $x^nG(t)$ & $(x^n + x^{n-1} +\cdots+ x^1)G(t)$ \\
         \hline
     \end{tabular}
     \item[Important:]
@@ -222,8 +223,8 @@
    mx'' + cx' + kx = f(t), \quad f(t) \text{ is an external force}
    \end{equation*}
    \begin{itemize}
-       \item$y_n$ is the ``transient solution"; approaches 0 and $t \to \infty$.
-       \item$y_p$ is the ``steady periodic solution" or ``steady state solution"; keeps oscillating as $t\to \infty$.
+       \item$y_n$ is the ``\underline{transient solution}"; approaches 0 and $t \to \infty$.
+       \item$y_p$ is the ``\underline{steady periodic solution}" or ``steady state solution"; keeps oscillating as $t\to \infty$.
    \end{itemize}
     \item[Resonance] TODO
 \end{description}
@@ -245,7 +246,7 @@ u(t-a) := \begin{cases}
     0 & t < a \\
     1 & t \geq a \\
 \end{cases}, \qquad
-\diffop{x} u(t-a) =: \ \delta(t-a)\\
+\diffop{t} u(t-a) =: \ \delta(t-a)\\
 f(t)  = \begin{cases}
 f_1(t) & t \in [0, t_1) \\
 f_2(t) & t \in [t_1, t_2) \\
