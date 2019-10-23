@@ -205,7 +205,7 @@
 % Group the third column in a "minipage" to ensure all element remain on the same page
 \begin{minipage}{\columnwidth}
 \begin{description}[style=unboxed,leftmargin=\cheatsheetmargin]
-    \renewcommand{\arraystretch}{1.3}
+    \renewcommand{\arraystretch}{1.2}
     \item \begin{tabular}{|c|c|}
         \hline
         \textbf{Non-homogeneous $f(t)$} & \textbf{``Guess" for $y_p$} \\
@@ -213,7 +213,7 @@
         $ae^{kt}$ & $Ae^{kt}$ \\
         $a\cos k t$ or $a\sin k t$ &  $A\cos k + B\sin k t$ \\
         Polynomial of degree $n$ & Polynomial of degree $n$ \\
-        $x^nG(t)$ & $(x^n + x^{n-1} +\cdots+ x^1)G(t)$ \\
+        $x^ne^{kt}$ & $(x^n + x^{n-1} +\cdots+ x^1)e^{kt}$ \\
         \hline
     \end{tabular}
     \item[Important:]
@@ -223,10 +223,13 @@
    mx'' + cx' + kx = f(t), \quad f(t) \text{ is an external force}
    \end{equation*}
    \begin{itemize}
-       \item$y_n$ is the ``\underline{transient solution}"; approaches 0 and $t \to \infty$.
-       \item$y_p$ is the ``\underline{steady periodic solution}" or ``steady state solution"; keeps oscillating as $t\to \infty$.
+       \item$x_n$ is the ``\underline{transient solution}"; approaches 0 and $t \to \infty$.
+       \item$x_p$ is the ``\underline{steady periodic solution}" or ``steady state solution"; keeps oscillating as $t\to \infty$.
    \end{itemize}
-    \item[Resonance] TODO
+    \item[Resonance] Occurs when the frequency of the force $\omega_0$ equals the natural frequency $\omega = \sqrt{k/m}$.
+    \begin{equation*}
+        f(t) = a\cos\left( \omega_0 t\right) \implies x_p = A\mathbf{t}\sin \omega_0 t + B\mathbf{t}\cos \omega_0 t
+    \end{equation*}
 \end{description}
 
 
