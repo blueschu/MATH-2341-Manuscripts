@@ -10,7 +10,10 @@
 \usepackage{fancyhdr}
 \usepackage{enumitem}
 \usepackage{tabularx}
-
+% For Lin Alg section
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{mathtools}
 
 %
 % Styling inspired by tex.stackexchange user "Dror" in this posting:
@@ -19,7 +22,7 @@
 
 \thispagestyle{fancy}
 \cfoot{\footnotesize Copyright \textcopyright \ 2019 Brian Schubert}
-\rfoot{\footnotesize Revised 2019-10-23}
+\rfoot{\footnotesize Revised 2019-11-20}
 \lhead{MATH 2341\\Differential Equations and Linear Algebra}
 \rhead{Fall 2019 \\ Prof. Prasanth George}
 \chead{\large \underline{Midterm Exam ``Cheat Sheet"}}
@@ -54,6 +57,10 @@
 % Notation Definitions
 \newcommand{\dd}[1]{\mathrm{d}#1}
 \newcommand{\diffop}[2][]{\frac{\dd#1}{\dd #2}}
+\newcommand{\matr}[1]{\mathbf{#1}}
+\newcommand{\bvec}[1]{\mathbf{#1}}
+\newcommand{\vecspace}[1]{\mathbb{#1}}
+\newcommand{\transp}{^\mathrm{T}}
 
 \newcommand\cheatsheetmargin{0.2cm}
 
@@ -291,4 +298,240 @@ If $\mathcal{L}\{f(t)\} = F(s)$, then
 \end{minipage} % End Column 3
 
 \end{multicols}
+
+\pagebreak
+\thispagestyle{fancy}
+
+\begin{multicols}{3}
+    
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+    \Large{\underline{Linear Algebra}} \\
+\end{center}
+
+\section{Matrix Algebra}
+For any two matrices $\matr{A} \in \vecspace{R}^{m_a \times n_a}$ and $\matr{B} \in \vecspace{R}^{m_b \times n_b}$
+\begin{description}
+    \item[Matrix Addition] The matrix $\matr{A+B}$ exists if and only if $m_a = m_b$ and $n_a = n_b$. Addition/subtraction then occurs elementwise.
+    \item[Scalar Multiplication] The matrix $c\matr{A}$ exists for any scalar $c$. The scalar $c$ multiplies each element of $\matr{A}$.
+\end{description}
+
+\subsubsection{Matrix Multiplication}
+Each column of $\matr{AB}$ is a combination of the columns of $\matr{A}$:
+
+\begin{equation*}
+\matr{A} \, \begin{bmatrix}
+\vert & & \vert \\
+\bvec{b_1} & \cdots & \bvec{b_p} \\
+\vert & & \vert
+\end{bmatrix} = \begin{bmatrix}
+\vert & & \vert \\
+\matr{A}\bvec{b_1} & \cdots & \matr{A}\bvec{b_p} \\
+\vert & & \vert
+\end{bmatrix}
+\end{equation*}
+
+\section{The Determinant}
+The determinant of a matrix is usually denoted $\det \matr{A}$ or $|\matr{A}|$. Geometrically, it is the factor by which the linear transformation associated with a matrix ``scales'' $n$-dimensional space. It may be visualized as the volume of the $n$-dimensional parallelopiped formed by the columns of the matrix.
+
+\begin{center}
+    \begin{tikzpicture}[scale=0.4]
+    % untransformed grid behind transformed grid
+    \begin{scope}
+    % background grid
+    \draw[scale=1,gray!40] (-1.9,-0.9) grid (8.9,3.9);
+    \draw[->,thick, gray, thick] (0,-1)--(0,4) node[above]{$y$};        
+    \end{scope}
+    
+    % transformed grid (slanted 45 degrees, x scaled by 2)
+    \begin{scope}[xslant=tan 45, yscale=2, xscale=3]
+    \coordinate (i) at (1,0);
+    \coordinate (j) at (0,1);
+    
+    % transformed grid
+    \draw[scale=1,cyan] (-1.9,-0.5) grid (2.3, 1.9);
+    \draw[->, very thick, black!10!cyan] (-1,0) -- (3,0) node[right]{$x$};
+    \draw[->, very thick, black!10!cyan] (0,-0.5) -- (0,2) node[above]{$y$};  
+    
+    \draw[-latex, thick, draw=black!50!cyan] (0,0) -- (i) node [midway, below] {$\bvec{i}' = \begin{bsmallmatrix}3\\0\end{bsmallmatrix}$};
+    \draw[-latex, thick,  draw=black!50!cyan] (0,0) -- (j) node [midway, above, rotate=45] {$\bvec{j}' = \begin{bsmallmatrix}2\\2\end{bsmallmatrix}$};
+    
+    \filldraw[draw=none, fill=cyan, fill opacity=0.2] (0,0) rectangle (1,1) node[opacity=1, pos=0.5] {$\det \matr{A}$};
+    \end{scope}
+    
+    \filldraw[white] (-2,-1) rectangle (-6, 2);
+    \node[scale=1.1] at (-5, 1.5) {$\matr{A} = \begin{bmatrix}3 & 2 \\ 0 & 2\end{bmatrix}$};
+    \end{tikzpicture}
+\end{center}
+
+Singular (non-invertible) matrices ``squish'' the space into a smaller dimension and therefore have a determinant of zero. The identity matrix $\matr{I}$ leaves a space unchanged and as such has a determinant of $1$.
+
+
+\paragraph{The Pivot Formula}
+
+When $\matr{A}$ is an upper or lower triangular matrix, its determinant is equal to the product of its pivots along its diagonal:
+\begin{equation*}
+\det \matr{A} = a_{11} a_{22} \cdots a_{nn} = \prod_{i = j} a_{ij}.
+\end{equation*}
+
+In order to apply this formula to non-triangular matrices, perform elimination to get $\matr{A=LU}$. Then we have
+\begin{equation*}
+\det \matr{A} = (\det \matr{U})(\det \matr{L}) = (1)(\det \matr{U}) = \det \matr{U}
+\end{equation*}
+
+This is usually the most practical way to compute the determinant
+
+\paragraph{The Cofactor Formula} \label{det-cofactor}
+
+Let $\matr{M}_{ij}$ be the submatrix obtained by removing the $i$th row and the $j$th column from some matrix $\matr{A}$. The cofactor $C_{ij}$ of the entry $a_{ij}$ of $\matr{A}$ is the number $(-1)^{i+j} \det \matr{M}_{ij}$. The determinant $\det \matr{A}$ may then be given by the dot product of any row of $\matr{A}$ with its cofactors.
+
+If we consider the first row of $\matr{A}$, then the cofactor expansion of the determinant is
+
+\begin{equation*}
+\boxed{\det \matr{A} = a_{11} \matr{C}_{11} + a_{12} \matr{C}_{12} + \dots + a_{1n} \matr{C}_{1n}}
+\end{equation*}
+
+Any row or column can be chosen in practice.. 
+
+The cofactor formula can be visualized as follows.
+\begin{gather*}
+\begin{vmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{vmatrix}
+= \\ a_{11} \begin{vmatrix}
+\blacksquare & \square & \square \\
+\square & a_{22} & a_{23} \\
+\square & a_{32} & a_{33}
+\end{vmatrix}
+- a_{12} \begin{vmatrix}
+\square & \blacksquare & \square \\
+a_{21} & \square & a_{23} \\
+a_{31} & \square & a_{33}
+\end{vmatrix}
++ a_{13} \begin{vmatrix}
+\square & \square & \blacksquare \\
+a_{21} & a_{22} & \square  \\
+a_{31} & a_{32} & \square 
+\end{vmatrix}
+\end{gather*}
+
+Note that this pattern extends to matrices of arbitrary dimensions.
+
+\section{Vector Spaces}
+A vector space $\vecspace{V}$ is a set that is closed under vector addition and scalar multiplication. The scalars are members of a field $\vecspace{F}$.
+In order for $\vecspace{V}$ to be a vector space over $\vecspace{F}$, the following conditions must hold true.
+
+\begin{enumerate}
+    % See strang 131
+    \item Vector addition is communicative
+    \item Vector addition is associative
+%    \begin{equation*}\forall \bvec{u,v,w} \in \vecspace{V} \quad \bvec{(u+v)+w=u+(v+w)}\end{equation*}
+    
+    \item Additive identity for vector addition
+%    \begin{equation*}\exists! \, \bvec{0} \in \vecspace{V} \hspace{0.5cm}
+%    \forall \bvec{v} \in \vecspace{V} \quad \bvec{0+v=v}\end{equation*}
+    
+    \item Additive inverse for vector addition
+%    \begin{equation*}\forall \bvec{v} \in \vecspace{V} \hspace{0.5cm}
+%    \exists! \, \bvec{(-v)} \in \vecspace{V} \quad \bvec{v+(-v)=0}\end{equation*}
+    
+    \item Multiplicative identify for scalar multiplication
+%    \begin{equation*}\exists! \, 1 \in \vecspace{F} \hspace{0.5cm}
+%    \forall \bvec{v} \in \vecspace{V} \quad 1\bvec{v=v}\end{equation*}
+    
+    \item Scalar multiplication is associative
+%    \begin{equation*}\forall c,d \in \vecspace{F} \quad
+%    \forall \bvec{v} \in \vecspace{V} \quad (cd)\bvec{v}=c(d\bvec{v})\end{equation*}
+    
+    \item Scalar multiplication distributes over vector addition
+%    \begin{equation*}\forall c \in \vecspace{F} \quad
+%    \forall \bvec{u,v} \in \vecspace{V} \quad c(\bvec{u+v}) = c\bvec{u} + d\bvec{v}\end{equation*}
+    
+    \item Scalar multiplication distributes over scalar addition
+%    \begin{equation*}\forall c,d \in \vecspace{F} \quad
+%    \forall \bvec{v} \in \vecspace{V} \quad (c+d)\bvec{v} = c\bvec{v} + d\bvec{v}\end{equation*}
+    
+\end{enumerate}
+\paragraph{Subspace}
+A subspace of a vector space is a set of vectors whose linear combinations stay within the subspace. That is, it is a set of vectors that is closed under vector addition and scalar multiplication. Note that all subspaces include the zero vector $\vec{0}$.
+
+\paragraph{Linear Combination}
+Given a sequence of vectors $\vec{v}_1, \vec{v}_2, \ldots, \vec{v}_n$, a linear combination of the vectors is a vector $c_1\vec{v}_1 + c_2\vec{v}_2 + \cdots + c_n\vec{v}_n$ where $c_1, c_2, \ldots, c_n$ are scalar.
+
+\paragraph{Span} The span of a set of vectors $\left\{\vec{v}_1, \vec{v}_2, \ldots, \vec{v}_n\right\}$ in a vectorspace $\vecspace{V}$ is a subspace of $\vecspace{V}$ that contains all of the vectors' linear combinations. It is often denoted $\mathrm{span}\, \{\vec{v}_i\}$.
+\begin{equation*}
+\mathrm{span} \, \{\vec{v}_1, \dots, \vec{v}_m\} = \left \{ { \left. \sum_{i=1}^m c_i \vec{v}_i \, \right| c_i \in \vecspace{R} } \right \}
+\end{equation*}
+Note that the span is itself a vector space.
+
+\paragraph{Basis}
+A sequence of vectors $\vec{v}_1, \vec{v}_2, \ldots, \vec{v}_n$ is a basis for a vector space $\vecspace{V}$ if
+\begin{enumerate}
+    \item $\vecspace{V}= \mathrm{span}\left\{\vec{v}_1, \vec{v}_2, \ldots, \vec{v}_n\right\}$
+    \item The vectors $\vec{v}_1, \vec{v}_2, \ldots, \vec{v}_n$ are linearly independent.
+\end{enumerate}
+
+\paragraph{Dimension} The number of vectors in a basis for a vector space $\vecspace{V}$ is called the dimensions of $\vecspace{V}$, denoted $\dim \vecspace{V}$.
+
+\subsection{Nullspace}
+The nullspace $\mathrm{N}(\matr{A})$ of a matrix $\matr{A}$ is the set of vectors $\vec{v}$ satisfying $\matr{A}\vec{v} = \vec{0}$.
+
+
+\section{Eigenvectors and Eigenvalues}
+Given a matrix $\matr{A}\in\vecspace{R}^{n\times n}$, an \textbf{eigenvector} of $\matr{A}$ in a vector $\vec{x}\in\vecspace{R}^n$ such that $\matr{A}\vec{x} = \lambda\vec{x}$ for some scalar $\lambda$. The scalar $\lambda$ is said to be an \textbf{eigenvalue} of $\matr{A}$.
+\subsection{Computing Eigenvalues}
+Solve for each scalar $\lambda$ such that
+\begin{gather*}
+    \matr{A}\vec{x} = \lambda\vec{x} \implies \matr{A}\vec{x} - \lambda \matr{I}\vec{x} = \vec{0} \implies \boxed{\det \left( \matr{A}\vec{x} - \lambda \matr{I}\right)\vec{x} = 0}
+\end{gather*}
+
+For each eignevalue $\lambda_i$, find the associated eigenvector by solving for the nullspace of the matrix $\matr{A}\vec{x} - \lambda \matr{I}$.
+\begin{equation*}
+    \vec{x}_i \in \mathrm{N}(\matr{A}\vec{x} - \lambda_i \matr{I})
+\end{equation*}
+
+\begin{description}
+    \item[Algebraic Multiplicity (AM)] The number of times the eigenvalue $\lambda$ is repeated.
+    \item[Geometric Mulitplicity (GM)] The number of linearly independent eigenvectors associated with the eigenvalue $\lambda_i$. (Equals dimension of the nullspace of $\matr{A}\vec{x} - \lambda_i \matr{I}$)
+\end{description}
+\subsection{Properties of Eigenvalues}
+\begin{itemize}
+    \item The sum of the eigenvalues equals the trace of a matrix.
+    \item The product of the eigenvalues equals the determinant of a matrix
+\end{itemize}
+
+\paragraph{Complex Eignenvalues} \begin{enumerate} \item If $\lambda_1 = a+ib$ is an eigenvalue of a matrix $\matr{A}$, then $\lambda_2 = a-ib$ is also an eigenvalue of $\matr{A}$.
+\item If $\vec{v}_1 = \vec{x}+i\vec{y}$ is an eigenvalue for $\lambda_1$, then $\vec{v}_2 = \vec{x}-i\vec{y}$ is an eigenvector for $\lambda_2$.
+\end{enumerate}
+
+\section{Systems of Differentials Equations}
+
+A system of differential equations in $n$ variables $x_1,\ldots,x_n$ is of the form
+\begin{equation*}
+\vec{x}' = \begin{bmatrix}
+x'_1(t) \\ \vdots \\ x'_n (t)
+\end{bmatrix}
+=\begin{bmatrix}
+a_{11} & \cdots & a_{1n} \\
+\vdots & \ddots & \vdots \\
+ a_{n1} & \cdots & a_{nn} \\
+\end{bmatrix} \begin{bmatrix}
+x_1(t) \\ \vdots \\ x_n (t)
+\end{bmatrix} + \begin{bmatrix}
+b_1 \\ \vdots \\ b_n
+\end{bmatrix} = \matr{A}\vec{x} + \vec{b}
+\end{equation*}
+If $\vec{b} = \vec{0}$, the system is homogenous.
+
+\end{multicols}
+
 \end{document}
