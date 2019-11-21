@@ -339,8 +339,8 @@ Each column of $\matr{AB}$ is a combination of the columns of $\matr{A}$:
 \end{equation*}
 
 \section{The Determinant}
-The determinant of a matrix is usually denoted $\det \matr{A}$ or $|\matr{A}|$. Geometrically, it is the factor by which the linear transformation associated with a matrix ``scales'' $n$-dimensional space. It may be visualized as the volume of the $n$-dimensional parallelopiped formed by the columns of the matrix.
-
+Geometrically, the determinant is the factor by which the linear transformation associated with a matrix ``scales'' $n$-dimensional space
+%The determinant of a matrix is usually denoted $\det \matr{A}$ or $|\matr{A}|$. Geometrically, it is the factor by which the linear transformation associated with a matrix ``scales'' $n$-dimensional space. It may be visualized as the volume of the $n$-dimensional parallelopiped formed by the columns of the matrix.
 \begin{center}
     \begin{tikzpicture}[scale=0.4]
     % untransformed grid behind transformed grid
@@ -370,8 +370,7 @@ The determinant of a matrix is usually denoted $\det \matr{A}$ or $|\matr{A}|$. 
     \node[scale=1.1] at (-5, 1.5) {$\matr{A} = \begin{bmatrix}3 & 2 \\ 0 & 2\end{bmatrix}$};
     \end{tikzpicture}
 \end{center}
-
-Singular (non-invertible) matrices ``squish'' the space into a smaller dimension and therefore have a determinant of zero. The identity matrix $\matr{I}$ leaves a space unchanged and as such has a determinant of $1$.
+%Singular (non-invertible) matrices ``squish'' the space into a smaller dimension and therefore have a determinant of zero. The identity matrix $\matr{I}$ leaves a space unchanged and as such has a determinant of $1$.
 
 
 \paragraph{The Pivot Formula}
@@ -390,15 +389,11 @@ This is usually the most practical way to compute the determinant
 
 \paragraph{The Cofactor Formula} \label{det-cofactor}
 
-Let $\matr{M}_{ij}$ be the submatrix obtained by removing the $i$th row and the $j$th column from some matrix $\matr{A}$. The cofactor $C_{ij}$ of the entry $a_{ij}$ of $\matr{A}$ is the number $(-1)^{i+j} \det \matr{M}_{ij}$. The determinant $\det \matr{A}$ may then be given by the dot product of any row of $\matr{A}$ with its cofactors.
-
-If we consider the first row of $\matr{A}$, then the cofactor expansion of the determinant is
+Let $\matr{M}_{ij}$ be the submatrix obtained by removing the $i$th row and the $j$th column from some matrix $\matr{A}$. The cofactor $C_{ij}$ of the entry $a_{ij}$ of $\matr{A}$ is the number $(-1)^{i+j} \det \matr{M}_{ij}$. The determinant $\det \matr{A}$ may then be given by the dot product of any row (or column) of $\matr{A}$ with its cofactors, e.g.:
 
 \begin{equation*}
 \boxed{\det \matr{A} = a_{11} \matr{C}_{11} + a_{12} \matr{C}_{12} + \dots + a_{1n} \matr{C}_{1n}}
 \end{equation*}
-
-Any row or column can be chosen in practice.. 
 
 The cofactor formula can be visualized as follows.
 \begin{gather*}
@@ -428,39 +423,50 @@ Note that this pattern extends to matrices of arbitrary dimensions.
 
 \section{Vector Spaces}
 A vector space $\vecspace{V}$ is a set that is closed under vector addition and scalar multiplication. The scalars are members of a field $\vecspace{F}$.
-In order for $\vecspace{V}$ to be a vector space over $\vecspace{F}$, the following conditions must hold true.
-
-\begin{enumerate}
+In order for $\vecspace{V}$ to be a vector space over $\vecspace{F}$, the following conditions must hold true for all vectors $\vec u, \vec v, \vec w \in \vecspace{V}$ and scalars $c,d \in \vecspace{F}$.
+\begin{multicols}{2}
+\begin{enumerate}[leftmargin=*]
     % See strang 131
-    \item Vector addition is communicative
-    \item Vector addition is associative
-%    \begin{equation*}\forall \bvec{u,v,w} \in \vecspace{V} \quad \bvec{(u+v)+w=u+(v+w)}\end{equation*}
+%    \item Vector addition commutes
+    \item $\vec u+ \vec v=\vec v+\vec u$
+
     
-    \item Additive identity for vector addition
+%    \item Vector addition is associative
+    \item $(\vec u+\vec v)+\vec w=\vec u+(\vec v+\vec w)$
+    
+%    \item Additive identity exists for vector addition
+    \item $\exists \vec{0} \quad \vec{0}+\vec{v}=\vec{v}$
 %    \begin{equation*}\exists! \, \bvec{0} \in \vecspace{V} \hspace{0.5cm}
 %    \forall \bvec{v} \in \vecspace{V} \quad \bvec{0+v=v}\end{equation*}
     
-    \item Additive inverse for vector addition
+%    \item Additive inverse exists for vector addition
+    \item $\exists (-\vec{v}) \quad v+(-v)=0$
 %    \begin{equation*}\forall \bvec{v} \in \vecspace{V} \hspace{0.5cm}
 %    \exists! \, \bvec{(-v)} \in \vecspace{V} \quad \bvec{v+(-v)=0}\end{equation*}
-    
-    \item Multiplicative identify for scalar multiplication
+
+%    \item Multiplicative identify exists for scalar multiplication
+    \item $\exists \vec{1} \quad \vec{1}\vec{v}=\vec{v}$
 %    \begin{equation*}\exists! \, 1 \in \vecspace{F} \hspace{0.5cm}
 %    \forall \bvec{v} \in \vecspace{V} \quad 1\bvec{v=v}\end{equation*}
     
-    \item Scalar multiplication is associative
+%    \item Scalar multiplication is associative
+    \item $(cd)\vec{v}=c(d\vec{v})$
 %    \begin{equation*}\forall c,d \in \vecspace{F} \quad
 %    \forall \bvec{v} \in \vecspace{V} \quad (cd)\bvec{v}=c(d\bvec{v})\end{equation*}
     
-    \item Scalar multiplication distributes over vector addition
+%    \item Scalar multiplication distributes over vector addition
+    \item $c(\vec{u}+\vec{v}) = c\vec{u} + c\vec{v}$
 %    \begin{equation*}\forall c \in \vecspace{F} \quad
 %    \forall \bvec{u,v} \in \vecspace{V} \quad c(\bvec{u+v}) = c\bvec{u} + d\bvec{v}\end{equation*}
     
-    \item Scalar multiplication distributes over scalar addition
+%    \item Scalar multiplication distributes over scalar addition
+    \item $(c+d)\vec{v} = c\vec{v} + d\vec{v}$
 %    \begin{equation*}\forall c,d \in \vecspace{F} \quad
 %    \forall \bvec{v} \in \vecspace{V} \quad (c+d)\bvec{v} = c\bvec{v} + d\bvec{v}\end{equation*}
     
 \end{enumerate}
+\end{multicols}
+
 \paragraph{Subspace}
 A subspace of a vector space is a set of vectors whose linear combinations stay within the subspace. That is, it is a set of vectors that is closed under vector addition and scalar multiplication. Note that all subspaces include the zero vector $\vec{0}$.
 
@@ -475,44 +481,46 @@ Note that the span is itself a vector space.
 
 \paragraph{Basis}
 A sequence of vectors $\vec{v}_1, \vec{v}_2, \ldots, \vec{v}_n$ is a basis for a vector space $\vecspace{V}$ if
-\begin{enumerate}
+\begin{enumerate}[noitemsep]
     \item $\vecspace{V}= \mathrm{span}\left\{\vec{v}_1, \vec{v}_2, \ldots, \vec{v}_n\right\}$
     \item The vectors $\vec{v}_1, \vec{v}_2, \ldots, \vec{v}_n$ are linearly independent.
 \end{enumerate}
 
 \paragraph{Dimension} The number of vectors in a basis for a vector space $\vecspace{V}$ is called the dimensions of $\vecspace{V}$, denoted $\dim \vecspace{V}$.
 
-\subsection{Nullspace}
+\paragraph{Nullspace}
 The nullspace $\mathrm{N}(\matr{A})$ of a matrix $\matr{A}$ is the set of vectors $\vec{v}$ satisfying $\matr{A}\vec{v} = \vec{0}$.
 
 
 \section{Eigenvectors and Eigenvalues}
 Given a matrix $\matr{A}\in\vecspace{R}^{n\times n}$, an \textbf{eigenvector} of $\matr{A}$ in a vector $\vec{x}\in\vecspace{R}^n$ such that $\matr{A}\vec{x} = \lambda\vec{x}$ for some scalar $\lambda$. The scalar $\lambda$ is said to be an \textbf{eigenvalue} of $\matr{A}$.
-\subsection{Computing Eigenvalues}
-Solve for each scalar $\lambda$ such that
-\begin{gather*}
-    \matr{A}\vec{x} = \lambda\vec{x} \implies \matr{A}\vec{x} - \lambda \matr{I}\vec{x} = \vec{0} \implies \boxed{\det \left( \matr{A}\vec{x} - \lambda \matr{I}\right)\vec{x} = 0}
-\end{gather*}
-
-For each eignevalue $\lambda_i$, find the associated eigenvector by solving for the nullspace of the matrix $\matr{A}\vec{x} - \lambda \matr{I}$.
-\begin{equation*}
-    \vec{x}_i \in \mathrm{N}(\matr{A}\vec{x} - \lambda_i \matr{I})
-\end{equation*}
-
-\begin{description}
+\begin{description}[style=unboxed,leftmargin=\cheatsheetmargin+0.2cm, topsep=0.2cm]
+    \item[Computing Eigenvalues]
+        Solve for each scalar $\lambda$ such that
+        \begin{gather*}
+            \matr{A}\vec{x} = \lambda\vec{x} \implies \matr{A}\vec{x} - \lambda \matr{I}\vec{x} = \vec{0} \implies \boxed{\det \left( \matr{A}\vec{x} - \lambda \matr{I}\right)\vec{x} = 0}
+        \end{gather*}
+        
+        For each eignevalue $\lambda_i$, find the associated eigenvector by solving for the nullspace of the matrix $\matr{A}\vec{x} - \lambda \matr{I}$.
+        \begin{equation*}
+            \vec{x}_i \in \mathrm{N}(\matr{A}\vec{x} - \lambda_i \matr{I})
+        \end{equation*}
+    
     \item[Algebraic Multiplicity (AM)] The number of times the eigenvalue $\lambda$ is repeated.
     \item[Geometric Mulitplicity (GM)] The number of linearly independent eigenvectors associated with the eigenvalue $\lambda_i$. (Equals dimension of the nullspace of $\matr{A}\vec{x} - \lambda_i \matr{I}$)
+        
+    \item[Properties of Eigenvalues]\hspace{\textwidth}\\
+        \begin{itemize}[leftmargin=*]
+            \item The sum of the eigenvalues equals the trace of a matrix.
+            \item The product of the eigenvalues equals the determinant of a matrix
+        \end{itemize}
+    
+    \item[Complex Eignenvalues]\hspace{\textwidth}\\
+        \begin{enumerate}[leftmargin=*]
+             \item If $\lambda_1 = a+ib$ is an eigenvalue of a matrix $\matr{A}$, then $\lambda_2 = a-ib$ is also an eigenvalue of $\matr{A}$.
+            \item If $\vec{v}_1 = \vec{x}+i\vec{y}$ is an eigenvalue for $\lambda_1$, then $\vec{v}_2 = \vec{x}-i\vec{y}$ is an eigenvector for $\lambda_2$.
+        \end{enumerate}
 \end{description}
-\subsection{Properties of Eigenvalues}
-\begin{itemize}
-    \item The sum of the eigenvalues equals the trace of a matrix.
-    \item The product of the eigenvalues equals the determinant of a matrix
-\end{itemize}
-
-\paragraph{Complex Eignenvalues} \begin{enumerate} \item If $\lambda_1 = a+ib$ is an eigenvalue of a matrix $\matr{A}$, then $\lambda_2 = a-ib$ is also an eigenvalue of $\matr{A}$.
-\item If $\vec{v}_1 = \vec{x}+i\vec{y}$ is an eigenvalue for $\lambda_1$, then $\vec{v}_2 = \vec{x}-i\vec{y}$ is an eigenvector for $\lambda_2$.
-\end{enumerate}
-
 \section{Systems of Differentials Equations}
 
 A system of differential equations in $n$ variables $x_1,\ldots,x_n$ is of the form
@@ -531,6 +539,35 @@ b_1 \\ \vdots \\ b_n
 \end{bmatrix} = \matr{A}\vec{x} + \vec{b}
 \end{equation*}
 If $\vec{b} = \vec{0}$, the system is homogenous.
+
+\subsection{General Homogeneous Solution}
+Assume $\vec{x} = e^{\lambda t}\vec{v}$ is a solution. Then,
+\begin{equation*}
+    \vec{x}' = \lambda e^{\lambda t}\vec{v} \implies \lambda e^{\lambda t}\vec{v} = \matr{A}e^{\lambda t}\vec{v} \implies (\matr{A}-\lambda\matr{I})\vec{v} = \vec{0}
+\end{equation*}
+\begin{equation*}
+    \boxed{\vec{x}' = c_1 e^{\lambda_1 t} \vec{v}_1 + c_2 e^{\lambda_2 t} \vec{v}_2 + \cdots + c_n e^{\lambda_n t} \vec{v}_n}
+\end{equation*}
+
+\subsection{Systems with Complex Eigenvalues}
+Assume $\matr{A}$ has eigenvalues $\lambda_1 = a + ib$ and $\lambda_2 = a-ib$ with eigenvectors $\vec{v}_1$ and $\vec{v}_2$, respectively.
+\begin{enumerate}
+    \item Start with any eigenvector-eigenvalue pair, say $e^{\lambda_1t}\vec{v}_1$/
+    \item Simplify and separate real and imaginary parts
+\begin{align*}
+    e^{(a+ib)t}\vec{v}_1 &= e^{at} \left[\cos (bt) + i\sin (bt)  \right]\begin{bmatrix}
+    v_1 \\ v_2
+    \end{bmatrix}\\
+    &= e^{at}\begin{bmatrix}
+    (\cos (bt) + i\sin (bt))v_1 \\ (\cos (bt) + i\sin (bt))v_2
+    \end{bmatrix}\\
+    &=e^{at} \left[\vec{w}_1 + i \vec{w}_2 \right] = e^{at}\vec{w}_1 + i e^{at}\vec{w}_2
+\end{align*}
+\end{enumerate}
+
+%\begin{bmatrix}
+%    \Re [v_1] + i \Im[v_1] \\ \Re [v_2] + i \Im[v_2]
+%\end{bmatrix}
 
 \end{multicols}
 
