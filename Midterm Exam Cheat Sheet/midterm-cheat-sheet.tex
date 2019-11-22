@@ -312,6 +312,9 @@ If $\mathcal{L}\{f(t)\} = F(s)$, then
 \setlength{\multicolsep}{1pt}
 \setlength{\columnsep}{2pt}
 
+% Note - large portions of the linear algebra cheat sheet,
+% inlcuding most determinant and vector spaces sections, are taken
+% from a more extensive LA cheat sheet that I made during Fall 2018.
 \begin{center}
     \Large{\underline{Linear Algebra}} \\
 \end{center}
@@ -425,7 +428,7 @@ Note that this pattern extends to matrices of arbitrary dimensions.
 
 \subsection{Inverse of a Matrix}
 \begin{gather*}
-\matr{A}\matr{A}^{-1} = \matr{A}^{-1}\matr{A} = I, \quad \matr{A} \in \vecspace{R}^{n\times n} \quad (\text{if } \mathrm{rank} \, \matr{A} = n)\\
+\matr{A}\matr{A}^{-1} = \matr{A}^{-1}\matr{A} = \matr{I}, \quad \matr{A} \in \vecspace{R}^{n\times n} \quad (\text{if } \mathrm{rank} \, \matr{A} = n)\\
 \begin{bmatrix}
 a & b \\ c & d
 \end{bmatrix}^{-1}
@@ -513,16 +516,16 @@ Given a matrix $\matr{A}\in\vecspace{R}^{n\times n}$, an \textbf{eigenvector} of
     \item[Computing Eigenvalues]
         Solve for each scalar $\lambda$ such that
         \begin{gather*}
-            \matr{A}\vec{x} = \lambda\vec{x} \implies \matr{A}\vec{x} - \lambda \matr{I}\vec{x} = \vec{0} \implies \boxed{\det \left( \matr{A}\vec{x} - \lambda \matr{I}\right)\vec{x} = 0}
+            \matr{A}\vec{x} = \lambda\vec{x} \implies \left(\matr{A} - \lambda \matr{I}\right)\vec{x} = \vec{0} \implies \boxed{\det \left( \matr{A} - \lambda \matr{I}\right) = 0}
         \end{gather*}
         
-        For each eigenvalue $\lambda_i$, find the associated eigenvector by solving for the nullspace of the matrix $\matr{A}\vec{x} - \lambda \matr{I}$.
+        For each eigenvalue $\lambda_i$, find the associated eigenvector by solving for the nullspace of the matrix $\matr{A} - \lambda \matr{I}$.
         \begin{equation*}
-            \vec{x}_i \in \mathrm{N}(\matr{A}\vec{x} - \lambda_i \matr{I})
+            \vec{x}_i \in \mathrm{N}(\matr{A} - \lambda_i \matr{I})
         \end{equation*}
     
     \item[Algebraic Multiplicity (AM)] The number of times the eigenvalue $\lambda$ is repeated.
-    \item[Geometric Mulitplicity (GM)] The number of linearly independent eigenvectors associated with the eigenvalue $\lambda_i$. (Equals dimension of the nullspace of $\matr{A}\vec{x} - \lambda_i \matr{I}$)
+    \item[Geometric Mulitplicity (GM)] The number of linearly independent eigenvectors associated with the eigenvalue $\lambda_i$. (Equals dimension of the nullspace of $\matr{A} - \lambda_i \matr{I}$)
         
     \item[Properties of Eigenvalues]\hspace{\textwidth}\\
         \begin{itemize}[leftmargin=*]
