@@ -22,7 +22,7 @@
 
 \thispagestyle{fancy}
 \cfoot{\footnotesize Copyright \textcopyright \ 2019 Brian Schubert}
-\rfoot{\footnotesize Revised 2019-11-20}
+\rfoot{\footnotesize Revised 2019-11-21}
 \lhead{MATH 2341\\Differential Equations and Linear Algebra}
 \rhead{Fall 2019 \\ Prof. Prasanth George}
 \chead{\large \underline{Midterm Exam ``Cheat Sheet"}}
@@ -322,7 +322,7 @@ For any two matrices $\matr{A} \in \vecspace{R}^{m_a \times n_a}$ and $\matr{B} 
     \item[Matrix Addition] The matrix $\matr{A+B}$ exists if and only if $m_a = m_b$ and $n_a = n_b$. Addition/subtraction then occurs elementwise.
     \item[Scalar Multiplication] The matrix $c\matr{A}$ exists for any scalar $c$. The scalar $c$ multiplies each element of $\matr{A}$.
 \end{description}
-
+\vspace{-8pt}
 \subsubsection{Matrix Multiplication}
 Each column of $\matr{AB}$ is a combination of the columns of $\matr{A}$:
 
@@ -341,6 +341,7 @@ Each column of $\matr{AB}$ is a combination of the columns of $\matr{A}$:
 \section{The Determinant}
 Geometrically, the determinant is the factor by which the linear transformation associated with a matrix ``scales'' $n$-dimensional space
 %The determinant of a matrix is usually denoted $\det \matr{A}$ or $|\matr{A}|$. Geometrically, it is the factor by which the linear transformation associated with a matrix ``scales'' $n$-dimensional space. It may be visualized as the volume of the $n$-dimensional parallelopiped formed by the columns of the matrix.
+\vspace{-10pt}
 \begin{center}
     \begin{tikzpicture}[scale=0.4]
     % untransformed grid behind transformed grid
@@ -370,6 +371,7 @@ Geometrically, the determinant is the factor by which the linear transformation 
     \node[scale=1.1] at (-5, 1.5) {$\matr{A} = \begin{bmatrix}3 & 2 \\ 0 & 2\end{bmatrix}$};
     \end{tikzpicture}
 \end{center}
+\vspace{-8pt}
 %Singular (non-invertible) matrices ``squish'' the space into a smaller dimension and therefore have a determinant of zero. The identity matrix $\matr{I}$ leaves a space unchanged and as such has a determinant of $1$.
 
 
@@ -397,12 +399,13 @@ Let $\matr{M}_{ij}$ be the submatrix obtained by removing the $i$th row and the 
 
 The cofactor formula can be visualized as follows.
 \begin{gather*}
-\begin{vmatrix}
-a_{11} & a_{12} & a_{13} \\
-a_{21} & a_{22} & a_{23} \\
-a_{31} & a_{32} & a_{33}
-\end{vmatrix}
-= \\ a_{11} \begin{vmatrix}
+%\begin{vmatrix}
+%a_{11} & a_{12} & a_{13} \\
+%a_{21} & a_{22} & a_{23} \\
+%a_{31} & a_{32} & a_{33}
+%\end{vmatrix}
+%= \\ 
+a_{11} \begin{vmatrix}
 \blacksquare & \square & \square \\
 \square & a_{22} & a_{23} \\
 \square & a_{32} & a_{33}
@@ -418,8 +421,21 @@ a_{21} & a_{22} & \square  \\
 a_{31} & a_{32} & \square 
 \end{vmatrix}
 \end{gather*}
-
 Note that this pattern extends to matrices of arbitrary dimensions.
+
+\subsection{Inverse of a Matrix}
+\begin{gather*}
+\matr{A}\matr{A}^{-1} = \matr{A}^{-1}\matr{A} = I, \quad \matr{A} \in \vecspace{R}^{n\times n} \quad (\text{if } \mathrm{rank} \, \matr{A} = n)\\
+\begin{bmatrix}
+a & b \\ c & d
+\end{bmatrix}^{-1}
+= \frac{1}{ad-bc}\begin{bmatrix}
+d & -b \\ -c & a
+\end{bmatrix},\quad \left[\,\matr{A} \; \vert \; \matr{I}\,\right] 
+\sim \left[\,\matr{I} \; \vert \; \matr{A}^{-1}\,\right]
+\end{gather*}
+
+
 
 \section{Vector Spaces}
 A vector space $\vecspace{V}$ is a set that is closed under vector addition and scalar multiplication. The scalars are members of a field $\vecspace{F}$.
@@ -491,7 +507,6 @@ A sequence of vectors $\vec{v}_1, \vec{v}_2, \ldots, \vec{v}_n$ is a basis for a
 \paragraph{Nullspace}
 The nullspace $\mathrm{N}(\matr{A})$ of a matrix $\matr{A}$ is the set of vectors $\vec{v}$ satisfying $\matr{A}\vec{v} = \vec{0}$.
 
-
 \section{Eigenvectors and Eigenvalues}
 Given a matrix $\matr{A}\in\vecspace{R}^{n\times n}$, an \textbf{eigenvector} of $\matr{A}$ in a vector $\vec{x}\in\vecspace{R}^n$ such that $\matr{A}\vec{x} = \lambda\vec{x}$ for some scalar $\lambda$. The scalar $\lambda$ is said to be an \textbf{eigenvalue} of $\matr{A}$.
 \begin{description}[style=unboxed,leftmargin=\cheatsheetmargin+0.2cm, topsep=0.2cm]
@@ -550,19 +565,23 @@ Assume $\vec{x} = e^{\lambda t}\vec{v}$ is a solution. Then,
 \end{equation*}
 
 \subsection{Systems with Complex Eigenvalues}
-Assume $\matr{A}$ has eigenvalues $\lambda_1 = a + ib$ and $\lambda_2 = a-ib$ with eigenvectors $\vec{v}_1$ and $\vec{v}_2$, respectively.
+Assume $\matr{A}$ has two eigenvalues $\lambda_1 = a + ib$ and $\lambda_2 = a-ib$ with eigenvectors $\vec{v}_1$ and $\vec{v}_2$, respectively.
 \begin{enumerate}
-    \item Start with any eigenvector-eigenvalue pair, say $e^{\lambda_1t}\vec{v}_1$/
+    \item Start with any eigenvector-eigenvalue pair, say $e^{\lambda_1t}\vec{v}_1$
     \item Simplify and separate real and imaginary parts
-\begin{align*}
-    e^{(a+ib)t}\vec{v}_1 &= e^{at} \left[\cos (bt) + i\sin (bt)  \right]\begin{bmatrix}
-    v_1 \\ v_2
-    \end{bmatrix}\\
-    &= e^{at}\begin{bmatrix}
-    (\cos (bt) + i\sin (bt))v_1 \\ (\cos (bt) + i\sin (bt))v_2
-    \end{bmatrix}\\
-    &=e^{at} \left[\vec{w}_1 + i \vec{w}_2 \right] = e^{at}\vec{w}_1 + i e^{at}\vec{w}_2
-\end{align*}
+    \begin{align*}
+        e^{(a+ib)t}\vec{v}_1 &= e^{at} \left[\cos (bt) + i\sin (bt)  \right]\begin{bmatrix}
+        v_1 \\ v_2
+        \end{bmatrix}\\
+        &= e^{at}\begin{bmatrix}
+        (\cos (bt) + i\sin (bt))v_1 \\ (\cos (bt) + i\sin (bt))v_2
+        \end{bmatrix}
+        =e^{at} \left[\vec{w}_1 + i \vec{w}_2 \right] 
+    \end{align*}
+    \item The homogeneous solution is then given by
+    \begin{equation*}
+        \vec{x} = c_1 \vec{w}_1 + c_2 \vec{w}_2
+    \end{equation*}
 \end{enumerate}
 
 %\begin{bmatrix}
