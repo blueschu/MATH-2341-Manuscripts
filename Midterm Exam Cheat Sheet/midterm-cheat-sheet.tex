@@ -22,7 +22,7 @@
 
 \thispagestyle{fancy}
 \cfoot{\footnotesize Copyright \textcopyright \ 2019 Brian Schubert}
-\rfoot{\footnotesize Revised 2019-11-21}
+\rfoot{\footnotesize Revised 2019-12-08}
 \lhead{MATH 2341\\Differential Equations and Linear Algebra}
 \rhead{Fall 2019 \\ Prof. Prasanth George}
 \chead{\large \underline{Midterm Exam ``Cheat Sheet"}}
@@ -153,7 +153,7 @@
          
     \item[Spring-Mass-Dashpot System:] \begin{equation*}mx'' + cx' +kx = 0 \end{equation*}
     \begin{description}[style=unboxed,leftmargin=0.1cm]
-        \item[Case 1:] $c=0 \implies$ Underdamped Vibration \\
+        \item[Case 1:] $c=0 \implies$ No Dampening \\
             \qquad \underline{Simple Harmonic Motion}
             \begin{align*}
                 x(t) &= C_1 \cos \omega t + C_2 \sin \omega t, \quad \omega = \sqrt{\frac{k}{m}}\\
@@ -177,7 +177,7 @@
             \begin{equation*}
             \boxed{x(t) = C_1 e^{r_1 t} + C_2 \mathbf{t}e^{r_2 t}}
             \end{equation*}
-         \item[Case 2c:] $c^2 < 4mk$
+         \item[Case 2c:] $c^2 < 4mk \implies$ ``Underdamped Vibration"
         \begin{gather*}
         r_1, r_2 = \underbrace{\frac{-c}{2m}}_{p} \pm i\underbrace{\frac{\sqrt{4mk - c^2}}{2m}}_{\mu: \text{ pseduo frequency}} \\
         \boxed{x(t) = e^{px} \left[C_1 \sin \left(\mu t\right) + C_2 \cos \left(\mu t\right) \right]}
